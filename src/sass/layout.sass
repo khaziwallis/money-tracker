@@ -80,14 +80,14 @@ $mobile-hide-on-scroll-anim-speed: 0.34s
 				display: flex
 				align-items: center
 				height: $layout-header-height
-				border-bottom: 1px solid #f3f3f3
+				border-bottom: 1px solid #f0f0f0
 				position: fixed
 				width: calc(100% - (2*#{$layout-padding}))
 				top: $header-height
 				z-index: 3
-				background-color: #fff
+				background-color: transparentize(#fff, 0.05)
 				padding: 0 $layout-padding
-				box-shadow: 5px 3px 9px 0px rgba(105, 100, 100, 0.07058823529411765)
+				box-shadow: 5px 3px 9px 0px rgba(105, 100, 100, 0.05)
 				+media-only-desktop
 					width: calc(100% - #{$nav-width-desktop} - (2*#{$layout-padding}))
 				+media-only-mobile
@@ -95,7 +95,7 @@ $mobile-hide-on-scroll-anim-speed: 0.34s
 				&>._ttl
 					display: flex
 					align-items: center
-					font-size: 21px
+					font-size: 18px
 					color: #444
 					font-weight: 400
 					// letter-spacing: -0.02em
@@ -109,7 +109,7 @@ $mobile-hide-on-scroll-anim-speed: 0.34s
 				z-index: 1
 				position: relative
 				top: $layout-header-height
-				animation: pageSlide 0.1s ease-out
+				animation: pageSlide 0.194s ease-out
 				min-height: calc(100vh - (2 * #{$header-height}) - #{$layout-header-height})
 				&>._full-page-loader
 					position: absolute

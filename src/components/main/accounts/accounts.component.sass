@@ -1,0 +1,47 @@
+@import './../../../sass/util/vars.sass'
+@import './../../../sass/util/mixins.sass'
+.accounts-tab
+	&>._list
+		&>._itm-outer
+			&>._itm
+				height: 160px
+				border: 1px solid rgba(217, 217, 217, 0.52)
+				border-radius: 7px
+				display: flex
+				flex-direction: column
+				overflow: hidden
+				// box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0), 0 3px 1px -2px rgba(0, 0, 0, 0.03), 0 1px 5px 0 rgba(0, 0, 0, 0.03)
+				+media-only-mobile
+					margin: 0 31px
+				&>.avtr
+					height: 70px
+					background-color: #f9f9f9
+					overflow: hidden
+					display: flex
+					align-items: center
+					justify-content: center
+					border-bottom: 1px solid rgba(217, 217, 217, 0.52)
+					&>._icn
+						color: #777
+						font-size: 41px
+				&>._dtls
+					margin: 13px
+					flex-grow: 1
+					&>._name
+						display: flex
+						align-items: center
+						&>._icn
+							margin-right: 11px
+							font-size: 25px
+							color: $primary
+						&>._lbl
+							flex-grow: 1
+							font-size: 13px
+							color: #777
+							font-weight: 500
+							text-overflow: ellipsis
+							overflow: hidden
+							white-space: nowrap
+				&.focus
+					background-color: rgba(232, 240, 254, 0.47)
+					border-color: rgba(116, 145, 197, 0.34)
