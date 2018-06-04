@@ -1,0 +1,152 @@
+@import './../../sass/util/vars.sass'
+@import './../../sass/util/mixins.sass'
+$setup-layout-padding: 39px
+._setup
+	display: flex
+	align-items: center
+	justify-content: center
+	background-color: #f9f9f9
+	min-height: 100vh
+	// position: fixed
+	top: 0
+	left: 0
+	width: 100%
+	&>._card
+		display: flex
+		min-height: 100vh
+		flex-direction: column
+		overflow-x: hidden
+		max-width: 500px
+		min-width: 300px
+		width: 50%
+		position: relative
+		background-color: #fff
+		box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2)
+		+media-only-mobile
+			width: 100%
+		&>._ldr
+			position: absolute
+			top: 0
+			left: 0
+			width: 100%
+			height: 100%
+			display: flex
+			align-items: center
+			justify-content: center
+			&>.bg-drop
+				position: absolute
+				top: 0
+				left: 0
+				width: 100%
+				height: 100%
+				background-color: #fff
+				opacity: 0.845
+				z-index: 2
+			&>.cont
+				z-index: 3
+				width: 210px
+				height: 70px
+				background-color: #fff
+				border: 1px solid #d9d9d9
+				border-radius: 5px
+				display: flex
+				align-items: center
+				justify-content: center
+				&>.ttl
+					margin-left: 19px
+		&>.line
+			background-color: $primary
+			min-height: 5px
+			height: 5px
+			position: absolute
+			top: 0
+			width: 100%
+		&>.title-bar
+			padding: 57px $setup-layout-padding
+			display: flex
+			flex-direction: column
+			justify-content: center
+			position: relative
+			&>.title
+				font-size: 18px
+				font-weight: 400
+				padding-bottom: 3px
+				display: flex
+				margin-bottom: 3px
+				margin-left: 75px
+			&>.sub-title
+				font-size: 25px
+				font-weight: 400
+				padding-bottom: 3px
+				display: flex
+				margin-left: 75px
+			&>._icn
+				position: absolute
+				color: rgba(153, 153, 153, 0.77)
+				font-size: 51px
+		&>._cont
+			padding: 0px $setup-layout-padding
+			margin-top: 31px
+			&>.welcome
+				margin: 3px 0px
+				& ._sub-hdr
+					margin-bottom: 7px
+					font-weight: 400
+					font-size: 20px
+				& .cptn
+					color: #777
+				& ._btn-cont
+					margin-top: 61px
+					display: flex
+					justify-content: center
+			&>.steps
+				margin-top: -43px
+				& .activeStepButton
+					& .MuiStepLabel-labelContainer-105
+						padding-bottom: 7px
+						border-bottom: 3px solid $primary
+				&>.currency
+					padding-top: 41px
+					&>._fld
+						margin-bottom: 21px
+						margin-top: 15px
+						display: flex
+						align-items: center
+						&>.label
+							color: #666
+							font-weight: 400
+							font-size: 16px
+						&>._frm
+							flex-grow: 1
+							margin-left: 17px
+					&>._actns
+						margin-top: 71px
+						text-align: right
+				&>.account
+					& ._mgn
+						margin: 9px 0
+					&>._tble
+						margin-top: 33px
+					&>._flds
+						display: flex
+						flex-wrap: wrap
+						align-items: center
+						&>._itm
+							// padding: 0 5px
+							flex-grow: 1
+							margin: 15px 0
+							width: 50%
+							&.select-inpt
+								position: relative
+								top: -13px
+							&>._inpt
+								width: 80%
+							+media-only-mobile
+								width: 100%
+								&>._inpt
+									width: 100%
+					&>._actns
+						margin-top: 21px
+						text-align: right
+
+

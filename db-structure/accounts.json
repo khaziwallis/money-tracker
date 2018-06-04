@@ -1,0 +1,8 @@
+[
+	{
+		"name": "string",
+		"balance": "number",
+		"group": "string",
+		"currency": "string"
+	}
+]

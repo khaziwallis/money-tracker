@@ -1,0 +1,68 @@
+@import './mixins.sass'
+@import './vars.sass'
+html, body
+	font-family: Roboto,Helvetica Neue,sans-serif
+	margin: 0 auto
+	&.app-nav-scroll-hidden-on-mobile
+		+media-only-mobile
+			overflow-y: hidden
+
+
+.text-right
+	text-align: right
+
+.display-none
+	display: none
+
+.text-success
+	color: $success
+.text-warning
+	color: $warning
+.text-info
+	color: $info
+.ic-space-btn
+	margin-left: 11px
+.ic-space-btn-left
+	margin-right: 5px
+
+.caption
+	color: #777
+	font-size: 13px
+	font-weight: 400
+.input-error
+	color: $input-error
+	font-size: 13px
+	font-weight: 400
+
+.width-100
+	width: 100%
+
+.small-tbl
+	&>thead
+		&>tr
+			&>th
+				padding: 0 13px!important
+	&>tbody
+		&>tr
+			&>td
+				padding: 0 13px!important
+
+
+// material type input coversion for auo-select
+$select-border-color: rgba(217, 217, 217, 0.42)
+.md.Select
+	&>.Select-control
+		border: transparent
+		border-bottom: 2px solid $select-border-color
+		border-radius: 0
+		box-shadow: none!important
+		transition: 0.2s all ease-in
+	&.is-focused
+		&>.Select-control
+			border-bottom-color: $primary
+
+// anim
+.pageSlideToRight
+	animation: pageSlideToRight 0.223s ease-out
+.pageSlideToLeft
+	animation: pageSlideToLeft 0.223s ease-out
