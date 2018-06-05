@@ -92,6 +92,7 @@ $mobile-hide-on-scroll-anim-speed: 0.34s
 					width: calc(100% - #{$nav-width-desktop} - (2*#{$layout-padding}))
 				+media-only-mobile
 					transition: $mobile-hide-on-scroll-anim-speed all
+					background-color: #fff
 				&>._ttl
 					display: flex
 					align-items: center
@@ -100,6 +101,12 @@ $mobile-hide-on-scroll-anim-speed: 0.34s
 					font-weight: 400
 					// letter-spacing: -0.02em
 					text-shadow: 0px 0px 0px rgba(32, 33, 36, 0.68)
+				&>._mobile-actions
+					+media-only-desktop
+						display: none!important
+					+media-only-mobile
+						display: inline-flex
+						align-items: center
 				&>._right
 					display: flex
 					flex-grow: 1
@@ -147,7 +154,10 @@ $mobile-hide-on-scroll-anim-speed: 0.34s
 			&>.app-content
 				& .lyt-cnt
 					&>._hdr
-						transform: translateY(-$header-height)
+						transform: translateY(-($header-height + 14px))
+						height: ($header-height)
+						padding-top: 14px
+
 
 
 

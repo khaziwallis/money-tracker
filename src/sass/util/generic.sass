@@ -13,6 +13,8 @@ html, body
 
 .display-none
 	display: none
+.display-none-strict
+	display: none!important
 
 .text-success
 	color: $success
@@ -66,3 +68,21 @@ $select-border-color: rgba(217, 217, 217, 0.42)
 	animation: pageSlideToRight 0.223s ease-out
 .pageSlideToLeft
 	animation: pageSlideToLeft 0.223s ease-out
+
+
+.responsive-modal
+	&>div:nth-child(2)
+		+media-only-mobile
+			height: 100%
+			width: 100%
+			max-width: 100%
+			min-width: 100%
+			max-height: 100%
+			margin: 0
+			border-radius: 0
+			top: 0
+			left: 0
+			& .close
+				margin-left: -17px
+		+media-only-desktop
+			min-width: 550px

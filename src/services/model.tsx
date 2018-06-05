@@ -17,7 +17,7 @@ export interface ICurrency {
 
 export interface IAccountForm {
   name: string;
-  balance: number;
+  balance: string;
   group: string;
 }
 

@@ -1,47 +1,113 @@
 @import './../../../sass/util/vars.sass'
 @import './../../../sass/util/mixins.sass'
-.accounts-tab
-	&>._list
-		&>._itm-outer
-			&>._itm
-				height: 160px
-				border: 1px solid rgba(217, 217, 217, 0.52)
-				border-radius: 7px
+._accounts
+	height: 1000px
+	&>._hdr
+		&>._right
+			&>._selctd-actns
 				display: flex
-				flex-direction: column
+				align-items: center
 				overflow: hidden
-				// box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0), 0 3px 1px -2px rgba(0, 0, 0, 0.03), 0 1px 5px 0 rgba(0, 0, 0, 0.03)
-				+media-only-mobile
-					margin: 0 31px
-				&>.avtr
-					height: 70px
-					background-color: #f9f9f9
-					overflow: hidden
+				&>._btn
+					height: 37px
+					width: 37px
+					margin: 0 3px
+					&>span>span
+						font-size: 21px
+				&>._dvdr
+					min-width: 1px
+					width: 1px
+					background-color: #d9d9d9
+					height: 24px
+					margin: 0 9px
+					+media-only-mobile
+						display: none
+
+	&>.accounts-tab
+		&>._list
+			&>._itm-outer
+				&>._itm
+					height: 170px
+					border: 1px solid rgba(217, 217, 217, 0.52)
+					border-radius: 7px
 					display: flex
-					align-items: center
-					justify-content: center
-					border-bottom: 1px solid rgba(217, 217, 217, 0.52)
-					&>._icn
-						color: #777
-						font-size: 41px
-				&>._dtls
-					margin: 13px
-					flex-grow: 1
-					&>._name
+					flex-direction: column
+					overflow: hidden
+					text-decoration: none
+					cursor: default
+					// box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0), 0 3px 1px -2px rgba(0, 0, 0, 0.03), 0 1px 5px 0 rgba(0, 0, 0, 0.03)
+					+media-only-mobile
+						margin: 0 21px
+					&>.avtr
+						height: 80px
+						background-color: #f9f9f9
+						overflow: hidden
 						display: flex
 						align-items: center
+						justify-content: center
+						border-bottom: 1px solid rgba(217, 217, 217, 0.52)
 						&>._icn
-							margin-right: 11px
-							font-size: 25px
-							color: $primary
-						&>._lbl
-							flex-grow: 1
-							font-size: 13px
-							color: #777
+							color: #b1b7ca
+							font-size: 41px
+					&>._dtls
+						margin: 13px
+						margin-top: 9px
+						flex-grow: 1
+						&>._name
+							display: flex
+							align-items: center
+							&>._icn
+								margin-right: 11px
+								font-size: 25px
+								color: $primary
+							&>._lbl
+								flex-grow: 1
+								font-size: 13px
+								color: #777
+								font-weight: 500
+								text-overflow: ellipsis
+								overflow: hidden
+								white-space: nowrap
+						&>._grp
+							font-size: 12px
 							font-weight: 500
-							text-overflow: ellipsis
-							overflow: hidden
-							white-space: nowrap
-				&.focus
-					background-color: rgba(232, 240, 254, 0.47)
-					border-color: rgba(116, 145, 197, 0.34)
+							color: #888
+							margin: 5px 0
+							display: inline-flex
+							// border: 1px solid rgba(50, 107, 162, 0.02)
+							// padding: 5px
+							border-radius: 5px
+							// background-color: rgba(103, 182, 210, 0.090784)
+						&>._blnce
+							display: flex
+							align-items: center
+							justify-content: flex-end
+							&>._icn
+								margin-right: -2px
+								color: #444
+								font-size: 16px
+								position: relative
+								top: -1px
+							&>._lbl
+								font-size: 14px
+								font-weight: 500
+								color: #444
+					&.focus, &:active, &:focus
+						background-color: rgba(232, 240, 254, 0.47)
+						border-color: rgba(116, 145, 197, 0.44)
+						outline: none
+						+media-only-mobile
+							border-color: rgba(116, 145, 197, 0.64)
+						&>._dtls
+							&>._blnce, &>._name
+								&>._icn, &>._lbl
+									color: $primary
+	&.item-selected
+		&>._hdr
+			&>._ttl
+				+media-only-mobile
+					display: none!important
+			&>._right
+				&>._always
+					+media-only-mobile
+						display: none!important

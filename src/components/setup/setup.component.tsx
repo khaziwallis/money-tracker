@@ -60,7 +60,7 @@ export class Setup extends React.Component<{}, IState> {
       completed: {},
       showErrors: false,
       currencyOptions: strings.currencyData,
-      accountForm: {name: '', balance: 0, group: ''},
+      accountForm: {name: '', balance: '', group: ''},
       currencyGroup: strings.currencyGroup,
       formErrors: {},
       accountsModel: [],
@@ -169,7 +169,7 @@ export class Setup extends React.Component<{}, IState> {
       console.log('valid')
       const accountsTemp: IAccountForm[] = this.state.accountsModel;
       accountsTemp.push(this.state.accountForm);
-      this.setState({accountsModel: accountsTemp, formErrors: {}, accountForm: {name:'', balance: 0, group: ''}});
+      this.setState({accountsModel: accountsTemp, formErrors: {}, accountForm: {name:'', balance: '', group: ''}});
     }
     else {
       console.log('invalid')
