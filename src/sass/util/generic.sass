@@ -86,3 +86,54 @@ $select-border-color: rgba(217, 217, 217, 0.42)
 				margin-left: -17px
 		+media-only-desktop
 			min-width: 550px
+
+
+
+.inner-loader-layout
+	position: absolute
+	top: 0
+	left: 0
+	width: 100%
+	height: 100%
+	display: none
+	align-items: center
+	justify-content: center
+	z-index: 5
+	&.active
+		display: flex
+	&>.back-drop
+		position: absolute
+		top: 0
+		left: 0
+		width: 100%
+		height: 100%
+		background-color: #fff
+		opacity: 0.8
+		z-index: 2
+	&>._cont
+		z-index: 3
+		background-color: #fff
+		display: flex
+		align-items: center
+		&>._ttl
+			margin-left: 15px
+
+$reading-loader-mask: rgba(238, 238, 238, 0.02)
+$reading-loader-line: rgba(221, 221, 221, 0.31)
+.reading-loader
+	position: relative
+	&:after
+		content: ""
+		background: linear-gradient(to right, $reading-loader-mask 8%, $reading-loader-line 18%, $reading-loader-mask 33%)
+		background-size: 240% 104px
+		position: absolute
+		animation-name: placeHolderShimmer
+		animation-timing-function: ease-in-out
+		animation-fill-mode: forwards
+		animation-duration: 1.1s
+		animation-iteration-count: infinite
+		width: 100%
+		height: 100%
+		top: 0
+		left: 0
+		z-index: 3

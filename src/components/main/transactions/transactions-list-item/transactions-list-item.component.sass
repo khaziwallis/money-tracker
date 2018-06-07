@@ -1,0 +1,85 @@
+@import './../../../../sass/util/mixins.sass'
+$row-height: 52px
+._itm-out
+	border: 1px solid transparent
+	border-bottom: 1px solid rgba(217, 217, 217, 0.479)
+	text-decoration: none
+	color: black
+	cursor: default
+	display: flex
+	align-items: center
+	&>._itm
+		display: table-row
+		height: $row-height
+		max-height: $row-height
+		vertical-align: middle
+		&>div
+			display: table-cell
+			height: $row-height
+			vertical-align: middle
+			&._accOuter
+				width: 20%
+			&._descOuter
+				width: 49%
+				+media-md
+					width: 40%
+				+media-xl
+					width: 55%
+			&._moneyOuter
+				padding: 0 11px
+			&._tagOuter
+				padding: 0 13px
+			&>div
+				display: flex
+				height: $row-height
+				max-height: $row-height
+				align-items: center
+				&._icn
+					padding: 0 11px
+					&.down
+						&>._icon
+							transform: rotateZ(90deg)
+					&.up
+						&>._icon
+							transform: rotateZ(-90deg)
+				&._acc
+					padding: 0 5px
+					font-weight: 700
+					font-size: 14px
+				&._money
+					padding: 0 5px
+					font-weight: 900
+					font-size: 15px
+					height: 29px
+					border-radius: 5px
+					display: inline-flex
+					border: 1px solid rgba(217, 217, 217, 0.4)
+					background-color: rgba(121, 157, 217, 0.0392156862745098)
+				&._desc
+					font-size: 12px
+					padding: 0 11px
+					font-weight: 400
+					color: #666
+					// justify-content: center
+				&._tag
+					padding: 0 5px
+					font-weight: 500
+					font-size: 12px
+					height: 21px
+					border-radius: 5px
+					display: inline-flex
+					background-color: #000
+					border: 1px solid #000
+					color: #fff
+				&._timestap
+					padding: 0 13px
+					font-size: 13px
+					color: #555
+	&.focus, &:active, &:focus
+		background-color: rgba(232, 240, 254, 0.47)!important
+		border-color: rgba(116, 145, 197, 0.44)
+		outline: none
+	&:hover
+		background-color: rgba(217, 217, 217, 0.135)
+		+media-only-mobile
+			border-color: rgba(116, 145, 197, 0.64)
