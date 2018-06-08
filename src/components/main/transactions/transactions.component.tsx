@@ -20,7 +20,7 @@ export class Transactions extends React.Component<{}, IState> {
 
   public render() {
     return (
-      <div className="lyt-cnt">
+      <div className="lyt-cnt _transactions">
         <div className="_hdr">
           <div className="_ttl"> Transactions </div>
           <div className="_right">
@@ -31,9 +31,41 @@ export class Transactions extends React.Component<{}, IState> {
           </div>
         </div>
         <div className="_cont">
+
+            <div className='table-header-bg'>
+              <div/>
+            </div>
             
             <div className="_list">
-            {[0,1,2,3,4,5,6,7,8,9,11,12,14,15,16].map((index)=>
+            <div className="_tble-header">
+              <div/>
+              <div className="money text-center">
+                <span>
+                  <span>Amount</span>
+                </span>
+              </div>
+              <div className="acc">
+                <span>
+                  <span>Account</span>
+                </span>
+              </div>
+              <div className="desc">
+                <span>
+                  <span>Desc</span>
+                </span>
+              </div>
+              <div className="tag">
+                <span>
+                  <span>Tag</span>
+                </span>
+              </div>
+              <div className="timestamp">
+                <span>
+                  <span>Date</span>
+                </span>
+              </div>
+            </div>
+            {[0,1,2,3,4,5,6,7,8,9,11,12,14,15,16,17,18,19,21,22,23].map((index)=>
                <TransactionsListItem key={index}/>
              )}
           </div>

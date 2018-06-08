@@ -60,5 +60,8 @@ class CommonUiEventsClass {
 		const el: Element = document.getElementsByClassName(appSelector)[0];
 		el.classList.remove(classToggle)
 	}
+	public scrollToTop() {
+		window.scrollTo(0,0);
+	}
 }
 export const CommonUiEvents = new CommonUiEventsClass();

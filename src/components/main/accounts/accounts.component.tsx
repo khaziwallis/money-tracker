@@ -15,6 +15,7 @@ import { ConfirmDialog } from './../../common/dialogs/confirm/confirm.dialog'
 import { AccountListItem } from './account-list-item/account-list-item.component';
 
 import { ISnackBar, IAccountsArray, IConfirmDialog } from './../../../services/model';
+import { CommonUiEvents } from './../../../services/ui.service';
 
 interface IState {
 	selectedAccountIndex: number;
@@ -86,6 +87,7 @@ export class Accounts extends React.Component<{}, IState> {
 
   public componentDidMount() {
        this.getAllAccounts();
+       CommonUiEvents.scrollToTop();
     }
 
   public componentWillUnmount() {

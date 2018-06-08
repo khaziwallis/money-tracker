@@ -1,85 +1,184 @@
 @import './../../../../sass/util/mixins.sass'
 $row-height: 52px
-._itm-out
-	border: 1px solid transparent
-	border-bottom: 1px solid rgba(217, 217, 217, 0.479)
+$row-border-color: rgba(217, 217, 217, 0.479)
+._Itm-Trans
+	display: table-row
+	height: $row-height
+	max-height: $row-height
+	vertical-align: middle
+	min-width: 100%
 	text-decoration: none
-	color: black
-	cursor: default
-	display: flex
-	align-items: center
-	&>._itm
-		display: table-row
+	color: #000
+	&>div
+		display: table-cell
 		height: $row-height
-		max-height: $row-height
 		vertical-align: middle
-		&>div
-			display: table-cell
-			height: $row-height
-			vertical-align: middle
-			&._accOuter
-				width: 20%
-			&._descOuter
-				width: 49%
-				+media-md
-					width: 40%
-				+media-xl
-					width: 55%
-			&._moneyOuter
-				padding: 0 11px
-			&._tagOuter
-				padding: 0 13px
+		position: relative
+		white-space: nowrap
+		text-overflow: ellipsis
+		overflow: hidden
+		z-index: 2
+		+media-only-desktop
+			border: 1px solid transparent
+			border-bottom: 1px solid $row-border-color
+		&:not(._descOuter)
+			max-width: 200px
+		&.shadow-right:after
+			content: ""
+			position: absolute
+			top: 0
+			right: 0
+			height: 100%
+			width: 31px
+			background: linear-gradient(to right, transparent, white)
+		&._strong-shadow:after
+			width: 91px
+		&._accOuter
+			width: 20%
+		&._descOuter
+			+media-sm
+				width: 30%
+				max-width: 230px
+			+media-md
+				width: 40%
+				max-width: 181px
+			+media-lg
+				width: 50%
+				max-width: 300px
+			+media-xl
+				width: 55%
+		&._moneyOuter
+			padding: 0 11px
+		&._tagOuter
+			padding: 0 13px
+		&._actnsOuter
+			display: none
+			z-index: 8
+			text-align: left
 			&>div
-				display: flex
-				height: $row-height
-				max-height: $row-height
-				align-items: center
-				&._icn
-					padding: 0 11px
-					&.down
-						&>._icon
-							transform: rotateZ(90deg)
-					&.up
-						&>._icon
-							transform: rotateZ(-90deg)
-				&._acc
-					padding: 0 5px
-					font-weight: 700
-					font-size: 14px
-				&._money
-					padding: 0 5px
-					font-weight: 900
-					font-size: 15px
-					height: 29px
-					border-radius: 5px
-					display: inline-flex
-					border: 1px solid rgba(217, 217, 217, 0.4)
-					background-color: rgba(121, 157, 217, 0.0392156862745098)
-				&._desc
-					font-size: 12px
-					padding: 0 11px
-					font-weight: 400
-					color: #666
-					// justify-content: center
-				&._tag
-					padding: 0 5px
-					font-weight: 500
-					font-size: 12px
-					height: 21px
-					border-radius: 5px
-					display: inline-flex
-					background-color: #000
-					border: 1px solid #000
-					color: #fff
-				&._timestap
-					padding: 0 13px
+				&>button
+					width: 32px
+					height: 32px
+					margin: 0 3px
+					&>span>span
+						font-size: 19px
+		&>div
+			display: flex
+			height: $row-height
+			max-height: $row-height
+			align-items: center
+			white-space: nowrap
+			text-overflow: ellipsis
+			overflow: hidden
+
+			&>div
+				white-space: nowrap
+				text-overflow: ellipsis
+				overflow: hidden
+			&._icn
+				padding: 0 11px
+				&.down
+					&>._icon
+						transform: rotateZ(90deg)
+				&.up
+					&>._icon
+						transform: rotateZ(-90deg)
+			&._acc
+				padding: 0 5px
+				font-weight: 700
+				font-size: 14px
+			&._money
+				padding: 0 5px
+				font-weight: 900
+				font-size: 15px
+				height: 29px
+				border-radius: 5px
+				display: inline-flex
+				border: 1px solid rgba(217, 217, 217, 0.4)
+				background-color: rgba(121, 157, 217, 0.0392156862745098)
+			&._desc
+				font-size: 12px
+				padding: 0 11px
+				font-weight: 400
+				color: #666
+				// justify-content: center
+			&._tag
+				padding: 0 5px
+				font-weight: 500
+				font-size: 12px
+				height: 21px
+				border-radius: 5px
+				display: inline-flex
+				background-color: #000
+				border: 1px solid #000
+				color: #fff
+			&._timestap
+				padding: 0 13px
+				font-size: 13px
+				color: #555
+	+media-xs
+		&>div
+			&._descOuter
+				display: none
+	+media-only-mobile
+		display: flex
+		width: 100%
+		border: 1px solid transparent
+		border-bottom: 1px solid $row-border-color
+		&>div
+			display: flex
+			align-items: center
+			&._descOuter
+				// display: none
+			&._icnOuter
+				width: auto
+				margin-left: 0px
+				&>._icn
+					padding: 0px
+			&._accOuter
+				width: 30%
+				&>._acc
 					font-size: 13px
-					color: #555
+			&._tagOuter
+				padding: 0 5px
+				&>._tag
+					font-size: 11px
+					font-weight: 900
+			&._moneyOuter
+				&>._money
+					height: 22px
+					justify-content: center
+					font-size: 11px
+					font-weight: 900
+			&._timestapOuter
+				&>._timestap
+					font-size: 11px
+					padding: 0 5px
+
 	&.focus, &:active, &:focus
-		background-color: rgba(232, 240, 254, 0.47)!important
-		border-color: rgba(116, 145, 197, 0.44)
+		background-color: rgba(232, 240, 254, 0.77)!important
 		outline: none
+		+media-only-mobile
+			border-color: rgba(116, 145, 197, 0.44)
+		+media-only-desktop
+			&>div
+				border-bottom-color: rgba(116, 145, 197, 0.44)
+				border-top-color: rgba(116, 145, 197, 0.44)
+				&:first-child
+					border-left-color: rgba(116, 145, 197, 0.44)
+				&:last-child
+					border-right-color: rgba(116, 145, 197, 0.44)
+		&>div.shadow-right:after
+			background: none
 	&:hover
 		background-color: rgba(217, 217, 217, 0.135)
+		&>div.shadow-right:after
+			background: none
 		+media-only-mobile
 			border-color: rgba(116, 145, 197, 0.64)
+		+media-only-desktop
+			&>._timestapOuter
+				display: none
+			&>._actnsOuter
+				display: table-cell
+				width: auto

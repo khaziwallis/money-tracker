@@ -3,6 +3,8 @@
 html, body
 	font-family: Google Sans,Roboto,RobotoDraft,Helvetica,Arial,sans-serif
 	margin: 0 auto
+	+media-only-mobile
+		// overflow-x: hidden
 	&.app-nav-scroll-hidden-on-mobile
 		+media-only-mobile
 			overflow-y: hidden
@@ -10,6 +12,8 @@ html, body
 
 .text-right
 	text-align: right
+.text-center
+	text-align: center
 
 .display-none
 	display: none

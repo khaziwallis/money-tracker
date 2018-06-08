@@ -1,0 +1,64 @@
+@import './../../../sass/util/mixins.sass'
+._transactions
+	&>._hdr
+		+media-only-desktop
+			background-color: #fff!important
+			box-shadow: none!important
+	&>._cont
+		+media-only-desktop
+			padding-top: 5px!important
+		+media-only-mobile
+			overflow-x: hidden
+		&>.table-header-bg
+			+media-only-mobile
+				display: none
+			display: flex
+			position: absolute
+			top: 0
+			left: 0
+			width: 100%
+			height: 39px
+			z-index: 3
+			overflow: hidden
+			&>div
+				position: fixed
+				flex-grow: 1
+				width: 100%
+				display: block
+				height: 39px
+				background-color: #fff
+				border-bottom: 1px solid #e4e4e4
+				box-shadow: 5px 3px 9px 0px rgba(105, 100, 100, 0.05)
+		& ._list
+			display: table
+			width: 100%
+			z-index: 3
+			&>._tble-header
+				display: table-header-group
+				+media-only-mobile
+					display: none
+				&>div
+					display: table-cell
+					height: 39px
+					vertical-align: middle
+					font-size: 13px
+					color: #666
+					font-weight: 500
+					&>span
+						display: flex
+						background-color: #fff
+						align-items: center
+						&>span
+							background-color: #fff
+							position: fixed
+							z-index: 4
+							margin-top: -5px
+					&.money
+						padding: 0 11px
+					&.acc
+						padding: 0 5px
+					&.desc
+						padding: 0 12px
+					&.tag, &.timestamp
+						padding: 0 13px
+			
