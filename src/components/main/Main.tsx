@@ -5,6 +5,7 @@ import { AppHeader } from './../common/app-header/app-header.component';
 import { AppNav } from './../common/app-nav/app.nav.component';
 import { Home } from './home/home.component';
 import { Transactions } from './transactions/transactions.component';
+import { Tags } from './tags/tags.component';
 import { Accounts } from './accounts/accounts.component';
 import { SideDrawer, HeaderEvents } from './../../services/ui.service';
 import { SettingDB } from './../../db/setting.db';
@@ -57,6 +58,7 @@ export class Main extends React.Component<IRouterProps, IState> {
                            <Route  exact={true} path={"/"} component={Home} />
                            <Route  path={"/accounts"} component={Accounts} />
                            <Route  path={"/transactions"} component={Transactions} />
+                           <Route  path={"/tags"} component={Tags} />
                          </div>
                        
                      

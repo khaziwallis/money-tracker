@@ -4,9 +4,10 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 
 import { TransactionsListItem } from './transactions-list-item/transactions-list-item.component';
+import { NewTransaction } from './new-transaction-modal/new-transaction-modal.component';
 
 interface IState {
-	view: string
+	newTransactionModal: boolean
 }
 
 export class Transactions extends React.Component<{}, IState> {
@@ -14,8 +15,14 @@ export class Transactions extends React.Component<{}, IState> {
   constructor(props: any) {
     super(props);
 
-    this.state = { view: 'aaa' };
-    setTimeout( () => { this.state.view = 'sss'}, 2000);
+    this.state = {
+      newTransactionModal: false
+    };
+  }
+
+
+  public openNewTransactionModal = () => {
+    this.setState({newTransactionModal: true});
   }
 
   public render() {
@@ -24,7 +31,7 @@ export class Transactions extends React.Component<{}, IState> {
         <div className="_hdr">
           <div className="_ttl"> Transactions </div>
           <div className="_right">
-             <Button color="primary" size="small" className="_always">
+             <Button color="primary" size="small" className="_always" onClick={this.openNewTransactionModal}>
                <Icon className="ic-space-btn-left">add</Icon>
                 Transaction
              </Button>
@@ -34,7 +41,7 @@ export class Transactions extends React.Component<{}, IState> {
 
             <div className='table-header-bg'>
               <div/>
-            </div>
+             </div>
             
             <div className="_list">
             <div className="_tble-header">
@@ -71,8 +78,10 @@ export class Transactions extends React.Component<{}, IState> {
           </div>
 
         </div>
+
+        <NewTransaction open={this.state.newTransactionModal} />
       </div>
-    );
+    )
   }
 }
 

@@ -1,0 +1,33 @@
+@import './../../../../sass/util/vars.sass'
+@import './../../../../sass/util/mixins.sass'
+._Tag-itm
+	height: 57px
+	border: 1px solid rgba(217, 217, 217, 0.62)
+	border-radius: 5px
+	border-left-width: 4px
+	display: flex
+	align-items: center
+	text-decoration: none
+	cursor: default
+	&>._lft
+		display: flex
+		width: 50px
+		align-items: center
+		height: 100%
+		justify-content: center
+	&>._rght
+		flex-grow: 1
+		display: flex
+		align-items: center
+		height: 100%
+		padding: 0 3px
+		&>._lbl
+			font-size: 17px
+			color: #000
+			font-weight: 400
+	&.focus, &:active, &:focus
+		background-color: rgba(232, 240, 254, 0.47)
+		border-color: rgba(116, 145, 197, 0.74)
+		outline: none
+		+media-only-mobile
+			border-color: rgba(116, 145, 197, 0.64)

@@ -24,6 +24,20 @@ export interface IDocTimeStamp {
   added: any;
   updated: any;
 }
+
+export interface ITagForm {
+  name: string;
+  color: string;
+}
+
+export interface ITransactionForm {
+  amount: string;
+  date: any;
+  tags: string[];
+  desc: string;
+  accountId: string;
+  type: string;
+}
 export interface IAccountData {
   name: string;
   balance: string;
@@ -32,6 +46,22 @@ export interface IAccountData {
   _rev: string;
   timestamp_: IDocTimeStamp;
 }
+export interface ITagData {
+  name: string;
+  color: string;
+  _id: string;
+  _rev: string;
+  timestamp_: IDocTimeStamp;
+}
+
+export interface ITagsArray {
+  doc: ITagData;
+  id: any;
+  key: any;
+  value: any;
+}
+
+
 export interface IAccountsArray {
   doc: IAccountData;
   id: any;
@@ -54,4 +84,9 @@ export interface ICurrencyGroup {
 }
 export interface IRouterProps extends RouteComponentProps<any> {
   history;
+}
+
+export interface IItemSelect {
+  index: number;
+  item?: any;
 }

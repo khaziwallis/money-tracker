@@ -111,6 +111,24 @@ $mobile-hide-on-scroll-anim-speed: 0.34s
 					display: flex
 					flex-grow: 1
 					justify-content: flex-end
+					&>._selctd-actns
+						display: flex
+						align-items: center
+						overflow: hidden
+						&>._btn
+							height: 37px
+							width: 37px
+							margin: 0 3px
+							&>span>span
+								font-size: 21px
+						&>._dvdr
+							min-width: 1px
+							width: 1px
+							background-color: #d9d9d9
+							height: 24px
+							margin: 0 9px
+							+media-only-mobile
+								display: none
 			&>._cont
 				padding: 21px $layout-padding
 				z-index: 1
