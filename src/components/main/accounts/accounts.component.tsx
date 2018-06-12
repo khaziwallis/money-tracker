@@ -1,10 +1,8 @@
 import * as React from 'react';
 import './accounts.component.css';
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import Grid from '@material-ui/core/Grid';
-import Snackbar from '@material-ui/core/Snackbar';
+import { 
+          Icon, Button, IconButton, Grid, Snackbar
+       } from '@material-ui/core';
 
 
 import { AccountDB } from './../../../db/accounts.db';
@@ -19,7 +17,8 @@ import { CommonUiEvents } from './../../../services/ui.service';
 
 interface IState {
 	selectedAccountIndex: number;
-  selectedAccountDoc: any;
+  selectedAccountDoc?: IAccountsArray | any;
+  isDetailsRightTab: boolean;
 	addAccountModalOpen: boolean;
   snackBar: ISnackBar;
   accountsData: IAccountsArray[];
@@ -35,13 +34,14 @@ export class Accounts extends React.Component<{}, IState> {
 
     this.state = {
     				selectedAccountIndex: -1,
-            selectedAccountDoc: null,
     				addAccountModalOpen: false,
             snackBar: {open: false},
             accountsData: [],
             confirmDialog: {open: false},
             accountDataLoading: false,
-            accountLoaderData: Common.getEmptyAccountsArrayData(4)
+            accountLoaderData: Common.getEmptyAccountsArrayData(4),
+            isDetailsRightTab: false,
+            selectedAccountDoc: Common.getEmptyAccountsArrayData(1)[0]
     			 };
    	this.listenClearSelectOnLayoutClick();
   }
@@ -69,7 +69,7 @@ export class Accounts extends React.Component<{}, IState> {
       for(const p of paths) {
         if(p.id === 'ITEM-NO-DESELECT') return;
       }
-      this.setState({selectedAccountIndex: -1})
+      this.setState({selectedAccountIndex: -1, isDetailsRightTab: false})
   }
 
   public handleAddAccountModelOnClose = (data: any) => {
@@ -130,6 +130,26 @@ export class Accounts extends React.Component<{}, IState> {
     }
   }
 
+  public onDoubleClickItem = () => {
+    this.toggleDetailsTab(true);
+  }
+
+  public toggleDetailsTab = (forceShow?: boolean) => {
+    if(!this.state.isDetailsRightTab || forceShow) {
+      this.setState({isDetailsRightTab: true});
+    } else {
+      this.setState({isDetailsRightTab: false});
+    }
+  }
+
+  public getUIGridsDimensionsForItem = (dim, ev) => {
+    let dime: number = 12;
+    if(dim === 'xs') {
+      dime = 12;
+    }
+    return dime;
+  }
+
   public render() {
     return (
       <div className={"lyt-cnt _accounts" + (this.state.selectedAccountIndex !== -1 ? " item-selected" : "")}>
@@ -146,10 +166,13 @@ export class Accounts extends React.Component<{}, IState> {
           	 	<IconButton aria-label="Delete" className="_btn" onClick={this.deleteAccount}>
     			    	<Icon>delete</Icon>
     			    </IconButton>
-    			    <IconButton aria-label="Edit" className="_btn">
+    			    <IconButton aria-label="Edit" className="_btn" disabled>
     			    	<Icon>edit</Icon>
     			    </IconButton>
-    			    <IconButton aria-label="Info" className="_btn">
+    			    <IconButton aria-label="Info" 
+                  className={"_btn" + (this.state.isDetailsRightTab ? ' btn-hovered' : '')} 
+                  onClick={this.toggleDetailsTab.bind(this, false)} 
+                  color={(this.state.isDetailsRightTab ? 'primary' : 'default')} >
     			    	<Icon>info</Icon>
     			    </IconButton>
     			    <div className="_dvdr"/>
@@ -162,32 +185,70 @@ export class Accounts extends React.Component<{}, IState> {
     		     </Button>
           </div>
         </div>
-        <div className="_cont accounts-tab">
-
-			<Grid container spacing={24} className="_list">
-			  {(this.state.accountsData).map((item: IAccountsArray, index) =>
-			  	<Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index} className="_itm-outer">
-		          	  <AccountListItem
-                    item={item}
-                    onClick={this.selectAccount}
-                    onFocus={this.selectAccount}
-                  />
-		        </Grid>
-			  )}
-
-        {(this.state.accountDataLoading) ? (
-            (this.state.accountLoaderData).map((item: IAccountsArray, index) =>
-                <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index} className="_itm-outer">
-                        <AccountListItem
+        <div className={"_cont accounts-tab" + (this.state.isDetailsRightTab ? " active-right-tab" : "")}>
+          <div className="_main">
+      			<Grid container spacing={24} className="_list">
+      			  {(this.state.accountsData).map((item: IAccountsArray, index) =>
+      			  	<Grid item 
+                      xs={12} 
+                      sm={this.state.isDetailsRightTab ? 6 : 6} 
+                      md={this.state.isDetailsRightTab ? 6 : 4} 
+                      lg={this.state.isDetailsRightTab ? 4 : 3} 
+                      xl={this.state.isDetailsRightTab ? 3 : 2} 
+                      key={index} className="_itm-outer">
+      		          	  <AccountListItem
                           item={item}
-                          loading={true}
+                          onClick={this.selectAccount}
+                          onFocus={this.selectAccount}
+                          onDoubleClick={this.onDoubleClickItem}
                         />
-                  </Grid>
-            )
-          ) : ('')}
-			</Grid>	
+      		        </Grid>
+      			  )}
 
+              {(this.state.accountDataLoading) ? (
+                  (this.state.accountLoaderData).map((item: IAccountsArray, index) =>
+                      <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index} className="_itm-outer">
+                              <AccountListItem
+                                item={item}
+                                loading={true}
+                              />
+                        </Grid>
+                  )
+                ) : ('')}
+      			</Grid>	
 
+          </div>
+          <div className="_right-tab scrolling-sub-header" id="ITEM-NO-DESELECT">
+            <div className="_tab-content">
+              <div className="_ttl-bar">
+                <div className="icon_">
+                  <IconButton aria-label="Delete" className="_btn" onClick={this.toggleDetailsTab.bind(this, false)}>
+                    <Icon>close</Icon>
+                  </IconButton>
+                </div>
+                <div className="_label">{this.state.selectedAccountDoc.doc.name}</div>
+              </div>
+              <div className="container_">
+                <div className='_avtr'>
+                  <Icon className="ic-space-btn-left _ic">account_balance</Icon>
+                </div>
+                <div className="_lst">
+                  <div className="_itm_">
+                    <div className="_nme">Name</div>
+                    <div className="_vle">{this.state.selectedAccountDoc.doc.name}</div>
+                  </div>
+                  <div className="_itm_">
+                    <div className="_nme">Balance</div>
+                    <div className="_vle">${this.state.selectedAccountDoc.doc.balance}/-</div>
+                  </div>
+                  <div className="_itm_">
+                    <div className="_nme">Group</div>
+                    <div className="_vle">{Common.getCurrencyGroupLabel(this.state.selectedAccountDoc.doc.group)}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <AddAcountModal name={'vinay'} open={this.state.addAccountModalOpen} onClose={this.handleAddAccountModelOnClose}/>
         <ConfirmDialog 

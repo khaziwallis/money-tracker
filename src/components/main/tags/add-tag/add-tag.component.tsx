@@ -129,7 +129,7 @@ export class AddTag extends React.Component<IProps, IState> {
             <div className="_itm">
               <FormControl  error={(this.state.formError.name ? true : false)} aria-describedby="name-error-text">
                 <InputLabel htmlFor="name-error">Name</InputLabel>
-                <Input id="name-error" value={this.state.tagForm.name} onChange={this.handleFormInputChange.bind(this, 'name')} />
+                <Input id="name-error" autoFocus value={this.state.tagForm.name} onChange={this.handleFormInputChange.bind(this, 'name')} />
                 <FormHelperText id="name-error-text">{this.state.formError.name ? this.state.formError.name : 'This is the name of the tag'}</FormHelperText>
               </FormControl>
             </div>

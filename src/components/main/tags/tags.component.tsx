@@ -6,14 +6,16 @@ import {
 
 import { TagListItem } from './tag-list-item/tag-list-item.component';
 import { AddTag } from './add-tag/add-tag.component';
-import { ISnackBar, ITagsArray, IItemSelect } from './../../../services/model';
+import { ConfirmDialog } from './../../common/dialogs/confirm/confirm.dialog'
+import { ISnackBar, ITagsArray, IItemSelect, IConfirmDialog } from './../../../services/model';
 import { TagDB } from './../../../db/tags.db';
 
 interface IState {
 	openAddTagsModal: boolean,
   snackBar: ISnackBar,
   tagsData: ITagsArray[],
-  selected: IItemSelect
+  selected: IItemSelect,
+  confirmDialog: IConfirmDialog;
 }
 
 export class Tags extends React.Component<{}, IState> {
@@ -25,7 +27,8 @@ export class Tags extends React.Component<{}, IState> {
       openAddTagsModal: false,
       snackBar: {open: false},
       tagsData: [],
-      selected: {index: -1}
+      selected: {index: -1},
+      confirmDialog: {open: false}
     };
   }
 
@@ -70,12 +73,46 @@ export class Tags extends React.Component<{}, IState> {
       for(const p of paths) {
         if(p.id === 'ITEM-NO-DESELECT') return;
       }
-      this.setState({selected: {index: -1}})
+      const selectedTemp: IItemSelect = this.state.selected;
+      selectedTemp.index = -1;
+      this.setState({selected: selectedTemp})
   }
 
   public handleOnSelectItem = (data: IItemSelect) => {
     this.setState({selected: data});
   }
+
+  public handleDeleteTag = () => {
+    this.setState({confirmDialog:{
+                      open: true, 
+                      title: "Confirm Delete", 
+                      okText: "Delete", 
+                      onClose: this.onDeleteConfirmDialogClose,
+                      desc: 'No longer available after you delete!'
+                    }});
+  }
+
+  public onDeleteConfirmDialogClose = (status) => {
+    this.setState({confirmDialog:{open: false}});
+    if(status === 1) {
+      console.log(this.state.selected.item)
+      TagDB.removeDoc(
+          this.state.selected.item.doc._id, 
+          this.state.selected.item.doc._rev, 
+          (suc)=>{
+            console.log(suc)
+            const temp: ITagsArray[] = this.state.tagsData;
+            const ix = temp.indexOf(this.state.selected.item);
+            console.log(ix)
+            temp.splice(ix, 1);
+            this.setState({tagsData: temp, snackBar: {open: true, message: 'Tag deleted successfully!'}});
+          }, (err)=>{
+            console.log(err)
+            this.setState({snackBar: {open: true, message: 'ERR:  Error in delete, Try Again!'}});
+          })
+    }
+  }
+
   public render() {
     return (
       <div className={"lyt-cnt _tags" + (this.state.selected.index !== -1 ? " item-selected" : "")}>
@@ -89,13 +126,13 @@ export class Tags extends React.Component<{}, IState> {
           <div className="_right">
             { (this.state.selected.index !== -1) ? (
                <div className='_selctd-actns' id="ITEM-NO-DESELECT"> 
-                 <IconButton aria-label="Delete" className="_btn">
+                 <IconButton aria-label="Delete" className="_btn" onClick={this.handleDeleteTag}>
                   <Icon>delete</Icon>
                 </IconButton>
-                <IconButton aria-label="Edit" className="_btn">
+                <IconButton aria-label="Edit" className="_btn" disabled>
                   <Icon>edit</Icon>
                 </IconButton>
-                <IconButton aria-label="Info" className="_btn">
+                <IconButton aria-label="Info" className="_btn" disabled>
                   <Icon>info</Icon>
                 </IconButton>
                 <div className="_dvdr"/>
@@ -126,6 +163,14 @@ export class Tags extends React.Component<{}, IState> {
           open={this.state.openAddTagsModal}
           onClose={this.onAddTagModalClose}
         />
+        <ConfirmDialog 
+          open={this.state.confirmDialog.open} 
+          title={this.state.confirmDialog.title} 
+          okText={this.state.confirmDialog.okText} 
+          cancelText={this.state.confirmDialog.cancelText} 
+          onClose={this.state.confirmDialog.onClose}
+          desc={this.state.confirmDialog.desc}
+         />
         <Snackbar
                   anchorOrigin={{
                     vertical: 'bottom',

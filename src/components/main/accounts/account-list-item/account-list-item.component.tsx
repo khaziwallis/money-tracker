@@ -13,6 +13,7 @@ interface IProps {
   onClick?: any;
   selected?: boolean;
   loading?: boolean;
+  onDoubleClick?: any;
 }
 
 export class AccountListItem extends React.Component<IProps, {}> {
@@ -26,13 +27,19 @@ export class AccountListItem extends React.Component<IProps, {}> {
     }
   }
 
+  public handleDoubleClick = () => {
+    if(this.props.onDoubleClick) this.props.onDoubleClick();
+  }
+
   public render() {
     return (
       <a href="javascript:void(0);" 
          id="ITEM-NO-DESELECT"  
          className={"_Account_Item" + (this.props.selected ? " focus" : "") + (this.props.loading ? ' _loading reading-loader' : '')} 
          onFocus={this.selectItem} 
-         onClick={this.selectItem}>
+         onClick={this.selectItem}
+         onDoubleClick={this.handleDoubleClick}
+         >
        <div className="avtr">
           <Icon className="ic-space-btn-left _icn">account_balance</Icon>
         </div>

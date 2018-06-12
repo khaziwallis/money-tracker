@@ -1,6 +1,7 @@
 @import './util/vars.sass'
 @import './util/mixins.sass'
 $mobile-hide-on-scroll-anim-speed: 0.34s
+$cont-details-tab-width: 330px
 .app
 	&>.app-header
 		background-color: #fff
@@ -136,6 +137,58 @@ $mobile-hide-on-scroll-anim-speed: 0.34s
 				top: $layout-header-height
 				animation: pageSlide 0.194s ease-out
 				min-height: calc(100vh - (2 * #{$header-height}) - #{$layout-header-height})
+				&>._right-tab
+					display: none
+				&.active-right-tab
+					display: flex
+					z-index: 2
+					&>._main
+						flex-grow: 1
+						z-index: 1
+						max-width: calc(100% - #{$cont-details-tab-width})
+					&>._right-tab
+						width: $cont-details-tab-width
+						z-index: 0
+						display: flex
+						position: fixed
+						flex-grow: 1
+						background-color: #fff
+						border-left: 1px solid #e6e6e6
+						height: calc(100vh - (#{$header-height}) - #{$layout-header-height})
+						right: 0
+						margin-top: -$layout-padding
+						&>div._tab-content
+							width: 100%
+							display: flex
+							flex-direction: column
+							&>._ttl-bar
+								height: 62px
+								align-items: center
+								display: flex
+								border-bottom: 1px solid #f0f0f0
+								&>.icon_
+									width: 60px
+									display: flex
+									justify-content: center
+									align-items: center
+								&>._label
+									font-weight: 500
+									font-size: 17px
+									color: #444
+					+media-only-mobile
+						z-index: 3
+						&>._main
+							max-width: 100%
+						&>._right-tab
+							width: 100%
+							left: 0
+							z-index: 3
+							height: 100%!important
+							margin-top: -($layout-header-height + $layout-padding)
+							transition: $mobile-hide-on-scroll-anim-speed all
+
+
+
 				&>._full-page-loader
 					position: absolute
 					top: 0
@@ -171,7 +224,7 @@ $mobile-hide-on-scroll-anim-speed: 0.34s
 			transition: 0.34s all
 			&>.app-content
 				& .lyt-cnt
-					&>._hdr
+					&>._hdr, & .scrolling-sub-header
 						transform: translateY(-($header-height + 14px))
 						height: ($header-height)
 						padding-top: 14px

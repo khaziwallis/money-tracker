@@ -36,6 +36,17 @@ class Tag {
 			});
 	}
 
+
+	public removeDoc(iD: string, reV: string, callback,  errCallback) {
+		this.db.remove(iD, reV)
+			.then((res)=>{
+				callback(res);
+			})
+			.catch((err)=>{
+				errCallback(err);
+			})
+	}
+
 }
 
 export const TagDB = new Tag();
