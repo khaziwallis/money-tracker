@@ -30,12 +30,18 @@ export interface ITagForm {
   color: string;
 }
 
+
+export interface IIdValue {
+  id: string;
+  value: string;
+}
+
 export interface ITransactionForm {
   amount: string;
   date: any;
-  tags: string[];
+  tags: IIdValue[];
   desc: string;
-  accountId: string;
+  account: IIdValue;
   type: string;
 }
 export interface IAccountData {

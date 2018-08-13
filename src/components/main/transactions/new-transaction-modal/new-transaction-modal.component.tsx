@@ -4,7 +4,7 @@ import {
           Dialog, DialogTitle, DialogContent, DialogActions, IconButton,
           Icon, Button, Snackbar, CircularProgress, 
           Grid,
-          Input, FormHelperText, FormControl, InputLabel
+          Input, FormHelperText, FormControl, InputLabel, TextField, MenuItem
        } from '@material-ui/core';
 // import Grid from '@material-ui/core/Grid';
 // import Input from '@material-ui/core/Input';
@@ -12,7 +12,9 @@ import {
 // import FormControl from '@material-ui/core/FormControl';
 // import MenuItem from '@material-ui/core/MenuItem'
 // import TextField from '@material-ui/core/TextField';
-import { ISnackBar, ITransactionForm } from './../../../../services/model';
+import { ISnackBar, ITransactionForm, IIdValue } from './../../../../services/model';
+import { TagSelect } from './../../tags/tag-select/tag-select.component';
+import { AccountDB } from './../../../../db/accounts.db';
 
 interface IProps {
   open: boolean;
@@ -23,6 +25,7 @@ interface IState {
   snackBar: ISnackBar;
   formErrors: any;
   transactionForm: ITransactionForm;
+  accounts: IIdValue[];
 }  
 
 export class NewTransaction extends React.Component<IProps, IState> {
@@ -34,9 +37,19 @@ export class NewTransaction extends React.Component<IProps, IState> {
       snackBar: {open: false},
       formErrors: {},
       transactionForm: {
-        accountId: "", amount: "", date: "", tags: [], type: "", desc: ''
-      }
+        account: {id: '', value: ''}, amount: "", date: "", tags: [], type: "", desc: ''
+      },
+      accounts: []
+
     }
+
+    this.init();
+  }
+
+  public init() {
+    AccountDB.getAccountsIdValue((v)=> {
+      this.setState({accounts: v});
+    });
   }
 
   public handleSnackBarClose = () => {
@@ -49,6 +62,33 @@ export class NewTransaction extends React.Component<IProps, IState> {
 
   public addTransaction = () => {
     console.log('adding')
+  }
+
+  public handleFormChange = (name, ev) => {
+    console.log(name, ev.target)
+    const obj: ITransactionForm = this.state.transactionForm;
+    obj[name] = ev.target.value;
+    this.setState({transactionForm: obj, formErrors: {}});
+  }
+
+  public handleFormChangeLevelTwo = (field, name, ev) => {
+    console.log(name, ev)
+    const obj: ITransactionForm = this.state.transactionForm;
+    obj[field][name] = ev.target.value;
+    if(field === 'account') {
+      obj[field]['value'] = this.getAccountValueById(ev.target.value);
+    }
+    this.setState({transactionForm: obj, formErrors: {}});
+  }
+
+  public getAccountValueById = (id) => {
+    let name:string = '';
+    this.state.accounts.forEach((v) => {
+      if(v.id === id) {
+        name = v.value;
+      }
+    });
+    return name;
   }
 
   public render() {
@@ -67,10 +107,10 @@ export class NewTransaction extends React.Component<IProps, IState> {
             </div>
           </div>
           <DialogTitle id="simple-dialog-title">
-            <IconButton aria-label="Close" className="close only-mobile-inline-flex-strict" onClick={this.handleModalClose}>
+             <IconButton aria-label="Close" className="close only-mobile-inline-flex-strict" onClick={this.handleModalClose}>
               <Icon>close</Icon>
             </IconButton>
-            Add Account
+            New Transaction
           </DialogTitle>
           <DialogContent>
 
@@ -80,9 +120,28 @@ export class NewTransaction extends React.Component<IProps, IState> {
               <Grid container={true}>
                 <Grid item={true} xs={12} md={6} >
                   <FormControl  error aria-describedby="name-error-text">
-                    <InputLabel htmlFor="name-error">Name</InputLabel>
-                    <Input id="name-error" />
-                    <FormHelperText id="name-error-text">Error</FormHelperText>
+                   <TextField
+                      id="select-currency"
+                      select
+                      placeholder="Account Group"
+                      value={this.state.transactionForm.account.id}
+                      onChange={this.handleFormChangeLevelTwo.bind(this, 'account', 'id')}
+                      SelectProps={{
+                        MenuProps: {
+                          className: 'menu',
+                        },
+                      }}
+                      helperText={this.state.formErrors['group'] ? this.state.formErrors['group'] : ''}
+                      margin="normal"
+                     
+                    >
+                      {this.state.accounts.map((option, index) => (
+                        <MenuItem key={option.id} value={option.id}>
+                          {option.value}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                    {this.state.transactionForm.account.id} - {this.state.transactionForm.account.value}
                   </FormControl>
                 </Grid>
 
@@ -111,6 +170,7 @@ export class NewTransaction extends React.Component<IProps, IState> {
                   </FormControl>
                 </Grid>
               </Grid>
+              <TagSelect />
 
            </div>
           </DialogContent>

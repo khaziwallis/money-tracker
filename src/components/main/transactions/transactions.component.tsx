@@ -1,10 +1,13 @@
 import * as React from 'react';
 import './transactions.component.css';
-import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
+import {
+          Button, Icon
+       } from '@material-ui/core';
 
 import { TransactionsListItem } from './transactions-list-item/transactions-list-item.component';
 import { NewTransaction } from './new-transaction-modal/new-transaction-modal.component';
+
+// import { AccountDB } from './../../../db/accounts.db';
 
 interface IState {
 	newTransactionModal: boolean
@@ -16,13 +19,23 @@ export class Transactions extends React.Component<{}, IState> {
     super(props);
 
     this.state = {
-      newTransactionModal: false
+      newTransactionModal: true
     };
+
+    // AccountDB.newTransaction(1333, 1, "4082a11d-7ec6-40a4-97f1-bea9b5852bc6", (res)=> {
+    //   console.log("Transaction complte", res);
+    // }, (err)=> {
+    //   console.log(err);
+    // })
   }
 
 
   public openNewTransactionModal = () => {
     this.setState({newTransactionModal: true});
+  }
+
+  public onNewTransactionModalClose = () => {
+    this.setState({newTransactionModal: false})
   }
 
   public render() {
@@ -79,7 +92,9 @@ export class Transactions extends React.Component<{}, IState> {
 
         </div>
 
-        <NewTransaction open={this.state.newTransactionModal} />
+        <NewTransaction 
+          open={this.state.newTransactionModal}
+          onClose={this.onNewTransactionModalClose}  />
       </div>
     )
   }

@@ -49,6 +49,7 @@ export class Accounts extends React.Component<{}, IState> {
   public getAllAccounts = () => {
     this.setState({accountDataLoading: true});
     AccountDB.getAllAccounts((res)=>{
+      console.log(res)
       this.setState({accountsData: res.rows, accountDataLoading: false});
     }, (err)=>{
       console.log(err)
